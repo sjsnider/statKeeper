@@ -1,0 +1,13 @@
+{
+  "name": "stat-keeper",
+  "version": "",
+  "dependencies": {
+    "bootstrap-css-only": "*",
+    "angular": "*" ,
+    "angular-route": "*",
+    "angular-touch": "*",
+    "angular-cookies": "*",
+    "ng-Fx": "*"
+  }
+}
+

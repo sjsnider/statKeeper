@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <form name="myForm" ng-submit="leagueSubmit()">
+  <input type="text" name="leagueName" ng-model="league" required="true" style ="width:300px;">
+  <input type="submit" value="Create New League">
+  </form>
+</div>
+<h2> {{ league }} </h2>
+<div class="links">
+Search: <input ng-model="searchText">
+<div ng-repeat="league in displayLeagues" | orderBy: predicate | filter:searchText>
+	<div>{{ league.name }}</div>
+</div>
