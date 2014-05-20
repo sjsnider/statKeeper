@@ -27,9 +27,10 @@
       console.log($scope.allSports.name);
       console.log($scope.sports);
       $scope.removedCategoriesArray = [];
+      console.log($scope.removedCategoriesArray);
       for (var i=0;i<$scope.sports.length;i++){
         if($scope.sports[i].name === $scope.allSports.name){
-          $scope.categoriesArray = $scope.sports[i].statCategories;
+          $scope.categoriesArray = $scope.sports[i].statCategories.slice();
         }
       }
     };
