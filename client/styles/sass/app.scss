@@ -30,5 +30,29 @@
 	background-color: #ff0000;
 }
 
+.statsContainer {
+	width:500px;
+	border:2px solid;
+	border-radius:25px;
+	margin-bottom:15px;
+	padding: 10px;
+}
+
+.names {
+	color:#ff0000;
+}
+.names:hover {
+	background-color:#d3d3d3;
+}
+
+h2 {
+	font-size:23px;
+	margin-top: 2px;
+}
+
+input {
+	margin-bottom: 5px;
+}
+
 
 

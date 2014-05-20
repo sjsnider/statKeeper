@@ -1,6 +1,6 @@
 (function (angular) {
   "use strict";
-  angular.module('statKeeper.main', ['ngRoute', 'statKeeper.main.note'])
+  angular.module('statKeeper.main', ['ngRoute', 'statKeeper.main.leagues'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -12,24 +12,23 @@
       });
   })
   .controller('MainController', function ($scope, $http) {
-    $scope.league = 'League name';
+    $scope.league = '';
+    $scope.curSport = '';
     $scope.displayLeagues = [];
     $scope.predicate = "name";
 
     var sportPromise = $http.get('/sports');
     sportPromise.success(function(data, status, headers, config){
-      console.log(data);
       $scope.sports=data;
-      $scope.form = {type: $scope.sports[0].name};
     });
 
     $scope.update = function(){
-      console.log($scope.allSports.name);
-      console.log($scope.sports);
+      $scope.curSport = $scope.allSports.name;
+ 
       $scope.removedCategoriesArray = [];
       console.log($scope.removedCategoriesArray);
       for (var i=0;i<$scope.sports.length;i++){
-        if($scope.sports[i].name === $scope.allSports.name){
+        if($scope.sports[i].name === $scope.curSport){
           $scope.categoriesArray = $scope.sports[i].statCategories.slice();
         }
       }
@@ -49,18 +48,27 @@
 
     $scope.leagueSubmit = function(){
       var newLeague = $scope.league;
-      console.log(newLeague);
-      var sport = $scope.allSports.name;
-      var leaguePromise = $http.post('/newLeague', {newLeague: newLeague, sport: sport});
+      if($scope.allSports){
+        var sport = $scope.allSports.name;
+      } else {
+        alert('You must select a sport!');
+        return;
+      }
+      var statCategories = $scope.categoriesArray;
+      console.log(statCategories);
+      var leaguePromise = $http.post('/newLeague', {
+          newLeague: newLeague,   
+          sport: sport,
+          statCategories: statCategories
+        });
       leaguePromise.success(function(data, status, headers, config){
-        console.log(data);
         $scope.displayLeagues.push(data);
         $scope.league = "Create Another One!";
       });
     };
+
     var leaguesPromise = $http.get('/leagues');
     leaguesPromise.success(function(data, status, headers, config){
-      console.log(data);
       $scope.displayLeagues = data;
     });
   });

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+	<div class = "statsContainer">
+		<h2>League Name: {{ league }}</h2>
+		<form name="myForm" ng-submit="teamSubmit()">
+			<ul>
+				<li ng-repeat='team in teams'>
+					Team Name: <input ng-model="team.name" required="true">
+					[<a href ng-click="teams.splice($index,1)">X</a>]
+				</li>
+			</ul>
+				<a href ng-click="teams.push({})"><div class ='removeButton'>Add More Team Fields</div></a>
+			
+			<br><br><input type="submit" value="Create New Team(s)">
+		</form>
+	</div>
+
+	<div class="statsContainer">
+	<h2> Select a team to add players:</h2>
+	<form name="myForm" ng-submit="playerSubmit()">
+		Teams: <select ng-model="allTeams" ng-options="team.name for team in displayTeams" ng-change="update()" required></select>
+		<br>
+		<h2>Current Roster</h2>
+		<ul>
+			<li ng-repeat="player in playersArray">{{ player.name }}</li>
+		</ul>
+		<ul>
+			<li ng-repeat='newPlayer in newPlayersArray'>
+				Player Name: <input ng-model="newPlayer.name" required="true">
+				[<a href ng-click="newPlayersArray.splice($index,1)">X</a>]
+			</li>
+		</ul>
+		<a href ng-click="newPlayersArray.push({})"><div class ='removeButton'>Add More Player Fields</div></a>
+		<br><br><input type="submit" value="Create New Player(s)">
+	</form>
+	</div>
+</div>

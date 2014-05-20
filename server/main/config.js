@@ -20,11 +20,10 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.logError);
   app.use(middle.handleError);
   app.post('/newLeague', function(req, res){
-    console.log('sport: ' + req.body.sport);
-    console.log('League: ' + req.body.newLeague);
     var newLeague = new NewLeague({
       name: req.body.newLeague,
-      sport: req.body.sport
+      sport: req.body.sport,
+      statCategories: req.body.statCategories
     });
     newLeague.save(function(error, league){
       if(error){
@@ -32,6 +31,41 @@ module.exports = exports = function (app, express, routers) {
       } else {
         console.log('success');
         res.send(200,league);
+      }
+    });
+  });
+
+  app.post('/newTeam', function(req, res){
+      console.log('name: ' + req.body.name);
+      console.log('league: ' + req.body.league);
+    var newTeam = new NewTeam({
+      name: req.body.name,
+      league: req.body.league
+    });
+    newTeam.save(function(error, team){
+      if(error){
+        console.log('error');
+      } else {
+        console.log('success');
+        res.send(200,team);
+      }
+    });
+  });
+
+  app.post('/newPlayer', function(req, res){
+      console.log('name: ' + req.body.name);
+      console.log('league: ' + req.body.league);
+    var newPlayer = new NewPlayer({
+      name: req.body.name,
+      league: req.body.league,
+      team: req.body.team
+    });
+    newPlayer.save(function(error, player){
+      if(error){
+        console.log('error');
+      } else {
+        console.log('success');
+        res.send(200,player);
       }
     });
   });
@@ -44,11 +78,33 @@ module.exports = exports = function (app, express, routers) {
     });
   });
 
+  app.get('/teams/:league', function(req, res){
+    NewTeam.find({league: req.params.league},function(error, teams){
+      if(teams){
+        res.send(200, teams);
+      }
+    });
+  });
+
   app.get('/sports', function(req, res){
     NewSport.find(function(error, sports){
       if(sports){
         res.send(200, sports);
       }
+    });
+  });
+
+  app.get('/checkLeague/:name', function(req, res){
+    NewLeague.findOne({name: req.params.name},function(error, league){
+      res.send(200, league);
+    });
+  });
+
+  app.get('/players/:league/:team', function(req, res){
+    console.log(req.params.league);
+    console.log(req.params.team);
+    NewPlayer.find({league: req.params.league, team: req.params.team},function(error, players){
+      res.send(200, players);
     });
   });
 };
@@ -64,8 +120,10 @@ var LeagueSchema = new mongoose.Schema({
   },
   sport: {
     type: String,
+    ref: 'NewSport', 
     required: true
-  }
+  },
+  statCategories: []
 });
 
 LeagueSchema.pre('save', function(next){
@@ -85,18 +143,62 @@ SportSchema.pre('save', function(next){
   next();
 });
 
-var NewLeague = mongoose.model('leagues', LeagueSchema);
+var TeamSchema = new mongoose.Schema({
+  name:{
+    type: String,
+    required: true
+  },
+  league:{
+    type: String,
+    ref: 'NewLeague', 
+    required: true
+  }
+});
+
+TeamSchema.index({name:1, league:1},{unique:true});
+
+TeamSchema.pre('save', function(next){
+  next();
+});
+
+var PlayerSchema = new mongoose.Schema({
+  name:{
+    type: String,
+    required: true
+  },
+  league:{
+    type: String,
+    ref: 'NewLeague', 
+    required: true
+  },
+  team:{
+    type: String,
+    ref: 'NewTeam', 
+    required: true
+  },
+  stats: []
+});
+
+PlayerSchema.index({name:1, league:1, team:1},{unique:true});
+
+PlayerSchema.pre('save', function(next){
+  next();
+});
+
 var NewSport = mongoose.model('sports', SportSchema);
 var newSport = new NewSport({
   name: 'Softball',
-  statCategories: ['GP', 'PA', 'ABs', 'Hits', 'Walks', 'OBP', 'AVG', '1Bs', '2Bs', '3Bs', 'HRs', 'RBIs', 'Runs']
+  statCategories: ['GP', 'PA', 'ABs', 'Hits', 'Walks', '1Bs', '2Bs', '3Bs', 'HRs', 'RBIs', 'Runs']
 });
 var newSport2 = new NewSport({
   name: 'Basketball',
-  statCategories: ['GP', 'Points', 'PPG', 'FGA', 'FGM', '3PA', '3PM', 'FTA', 'FTM', 'FG%', '3P%', 'FT%', 'Assists', 'APG', 
-  'Steals', 'SPG', 'Blocks', 'BPG']
+  statCategories: ['GP', 'Points', 'FGA', 'FGM', '3PA', '3PM', 'FTA', 'FTM', 'Assists', 
+  'Steals', 'Blocks']
 });
 
+var NewLeague = mongoose.model('leagues', LeagueSchema);
+var NewTeam = mongoose.model('teams', TeamSchema);
+var NewPlayer = mongoose.model('players', PlayerSchema);
 newSport.save(function(error, sport){
   if(error){
     console.log('error');
