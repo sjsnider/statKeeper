@@ -1,12 +1,27 @@
 <div class="container-fluid">
   <form name="myForm" ng-submit="leagueSubmit()">
-  <input type="text" name="leagueName" ng-model="league" required="true" style ="width:300px;">
+  Name: <input type="text" ng-model="league" required="true" style ="width:300px;"><br>
+  Sport: <select ng-model="allSports" ng-options="sport.name for sport in sports" ng-change="update()"></select><br>
+  Click on any stat you wish to remove:
+  <ul>
+  	<li ng-repeat="category in categoriesArray">
+  		<div class ='removeButton' ng-click="remove($index)">{{ category }}</div>
+  	</li>
+  </ul>
+  Put back any stats you removed that you'd like to include:
+  
+  <ul>
+  	<li ng-repeat="category in removedCategoriesArray">
+ 		 <div class ='addButton' ng-click="add($index)">{{ category }}</div>
+  	</li>
+  </ul>
+  
   <input type="submit" value="Create New League">
   </form>
 </div>
 <h2> {{ league }} </h2>
 <div class="links">
 Search: <input ng-model="searchText">
-<div ng-repeat="league in displayLeagues" | orderBy: predicate | filter:searchText>
+<div ng-repeat="league in displayLeagues | orderBy: predicate | filter:searchText">
 	<div>{{ league.name }}</div>
 </div>
