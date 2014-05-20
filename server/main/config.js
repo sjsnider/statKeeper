@@ -70,6 +70,52 @@ module.exports = exports = function (app, express, routers) {
     });
   });
 
+    app.post('/stats', function(req, res){
+      console.log(req.body.singles, req.body.doubles, req.body.triples);
+
+      var stats ={    
+          PA: req.body.PA,   
+          ABs: req.body.ABs,
+          Hits: req.body.Hits,
+          Walks: req.body.Walks,
+          Singles: req.body.Singles,
+          Doubles: req.body.Doubles,
+          Triples: req.body.Triples,
+          HRs: req.body.HRs,
+          RBIs: req.body.RBIs,
+          Runs: req.body.Runs
+        };
+
+      NewPlayer.findOneAndUpdate({
+        name: req.body.name,
+        league: req.body.league,
+        team: req.body.team
+      },
+      {$push: {stats: stats}},
+      {safe:true, upsert:true}, function(err,model){
+        if(err){
+          console.log('error');
+        } else {
+          console.log('success');
+          res.send(200,model);
+      }
+      });
+      
+    // var newPlayer = new NewPlayer({
+    //   name: req.body.name,
+    //   league: req.body.league,
+    //   team: req.body.team
+    // });
+    // newPlayer.save(function(error, player){
+    //   if(error){
+    //     console.log('error');
+    //   } else {
+    //     console.log('success');
+    //     res.send(200,player);
+    //   }
+    // });
+  });
+
   app.get('/leagues', function(req, res){
     NewLeague.find(function(error, leagues){
       if(leagues){
@@ -104,6 +150,13 @@ module.exports = exports = function (app, express, routers) {
     console.log(req.params.league);
     console.log(req.params.team);
     NewPlayer.find({league: req.params.league, team: req.params.team},function(error, players){
+      res.send(200, players);
+    });
+  });
+
+  app.get('/players/:league', function(req, res){
+    console.log(req.params.league);
+    NewPlayer.find({league: req.params.league},function(error, players){
       res.send(200, players);
     });
   });
@@ -188,11 +241,11 @@ PlayerSchema.pre('save', function(next){
 var NewSport = mongoose.model('sports', SportSchema);
 var newSport = new NewSport({
   name: 'Softball',
-  statCategories: ['GP', 'PA', 'ABs', 'Hits', 'Walks', '1Bs', '2Bs', '3Bs', 'HRs', 'RBIs', 'Runs']
+  statCategories: ['PA', 'ABs', 'Hits', 'Walks', '1Bs', '2Bs', '3Bs', 'HRs', 'RBIs', 'Runs']
 });
 var newSport2 = new NewSport({
   name: 'Basketball',
-  statCategories: ['GP', 'Points', 'FGA', 'FGM', '3PA', '3PM', 'FTA', 'FTM', 'Assists', 
+  statCategories: ['Points', 'FGA', 'FGM', '3PA', '3PM', 'FTA', 'FTM', 'Assists', 
   'Steals', 'Blocks']
 });
 

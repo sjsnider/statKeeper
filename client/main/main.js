@@ -1,6 +1,6 @@
 (function (angular) {
   "use strict";
-  angular.module('statKeeper.main', ['ngRoute', 'statKeeper.main.leagues'])
+  angular.module('statKeeper.main', ['ngRoute', 'statKeeper.main.leagues', 'statKeeper.main.viewStats' , 'statKeeper.main.stats'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
