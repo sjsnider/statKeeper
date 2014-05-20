@@ -1,34 +1,35 @@
+<div>
 <h2>Select Existing League</h2>
-Leagues: <select ng-model="allLeagues" ng-options="league.name for league in displayLeagues" ng-change="displayTeams()" required>
+Leagues: <select ng-model="allLeagues.selectedOption" ng-options="league.name for league in displayLeagues" ng-change="displayTeams()">
 	</select><br>
+</div>
 	<div ng-show="showTeams">
 		<h2>Select Existing Team</h2>
 		Teams: <select ng-model="allTeams" ng-options="team.name for team in displayTeams" ng-change="displayPlayers()" 
-	 	required>
+	 	>
 		</select>
 	</div>
 	<div ng-show="showPlayers">
 	<h2>Select Players to input stats for</h2>
-		Players: <select ng-model="allPlayers" ng-options="player.name for player in playersArray" ng-change="displayPlayer()" 
-	 	required>
+		Players: <select ng-model="allPlayers" ng-options="player.name for player in playersArray" ng-change="displayPlayer()" >
 		</select>
 	</div>
 	<br><br>
-	<div class="CSSTableGenerator" ng-show="statEnter">
+	<div ng-show="statEnter" class="fx-fade-down fx-easing-bounce fx-speed-1600">
 	<form name="myForm" ng-submit="statSubmit()">
-		<table>
+		<table class="hovertable">
 		<tr>
-			<td>Player Name</td>
-			<td ng-show='PAshow'>PA</td>
-			<td ng-show='ABshow'>ABS</td>
-			<td ng-show='Hitsshow'>Hits</td>
-			<td ng-show='Walksshow'>Walks</td>
-			<td ng-show='singlesshow'>1Bs</td>
-			<td ng-show='doublesshow'>2Bs</td>
-			<td ng-show='triplesshow'>3Bs</td>
-			<td ng-show='HRsshow'>HRs</td>
-			<td ng-show='RBIsshow'>RBIs</td>
-			<td ng-show='Runsshow'>Runs</td>
+			<th>Player Name</th>
+			<th ng-show='PAshow'>PA</th>
+			<th ng-show='ABshow'>ABS</th>
+			<th ng-show='Hitsshow'>Hits</th>
+			<th ng-show='Walksshow'>Walks</th>
+			<th ng-show='singlesshow'>1Bs</th>
+			<th ng-show='doublesshow'>2Bs</th>
+			<th ng-show='triplesshow'>3Bs</th>
+			<th ng-show='HRsshow'>HRs</th>
+			<th ng-show='RBIsshow'>RBIs</th>
+			<th ng-show='Runsshow'>Runs</th>
 		</tr>
 		<tr>
 			<td>{{ player }}</td>

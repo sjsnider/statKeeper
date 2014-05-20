@@ -50,8 +50,16 @@ angular.module('statKeeper.main.viewStats', ['ngRoute'])
 	    			playerInfo.rbis += parseFloat($scope.playersArray[i].stats[x].RBIs);
 	    			playerInfo.runs += parseFloat($scope.playersArray[i].stats[x].Runs);
 	    		}
-	    		playerInfo.obp = ((playerInfo.bb + playerInfo.hits)/playerInfo.pa).toFixed(3);
-	    		playerInfo.avg = (playerInfo.hits/playerInfo.ab).toFixed(3);
+	    		if(playerInfo.bb + playerInfo.hits===0){
+	    			playerInfo.obp = 0.000;
+	    		} else{
+	    			playerInfo.obp = ((playerInfo.bb + playerInfo.hits)/playerInfo.pa).toFixed(3);
+	    		}
+	    		if(playerInfo.hits===0){
+	    			playerInfo.avg = 0.000;
+	    		} else {
+	    			playerInfo.avg = (playerInfo.hits/playerInfo.ab).toFixed(3);
+	    		}
 	    		$scope.playersDisplayArray.push(playerInfo);
 	    	}
 	    });

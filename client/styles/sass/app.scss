@@ -34,8 +34,10 @@
 	width:500px;
 	border:2px solid;
 	border-radius:25px;
-	margin-bottom:15px;
+	margin-right:15px;
 	padding: 10px;
+	float: left;
+	background-color:#d3d3d3;
 }
 
 .names {
@@ -46,7 +48,7 @@
 }
 
 h2 {
-	font-size:23px;
+	font-size:20px;
 	margin-top: 2px;
 }
 
@@ -61,99 +63,38 @@ th {
 input {
 	margin-bottom: 5px;
 }
+.basketball, .softball {
+width: 50px;
+height: 50px;
+background-image:url("../../basketball.png");
+background-repeat:no-repeat;
+}
+.softball{
+	background-image:url("../../softball.png");	
+}
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
 
-.CSSTableGenerator {
-	margin:0px;padding:0px;
-	width:700px;
-	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #000000;
-	
-	-moz-border-radius-bottomleft:7px;
-	-webkit-border-bottom-left-radius:7px;
-	border-bottom-left-radius:7px;
-	
-	-moz-border-radius-bottomright:7px;
-	-webkit-border-bottom-right-radius:7px;
-	border-bottom-right-radius:7px;
-	
-	-moz-border-radius-topright:7px;
-	-webkit-border-top-right-radius:7px;
-	border-top-right-radius:7px;
-	
-	-moz-border-radius-topleft:7px;
-	-webkit-border-top-left-radius:7px;
-	border-top-left-radius:7px;
-}.CSSTableGenerator table{
-    border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	height:100%;
-	margin:0px;padding:0px;
-}.CSSTableGenerator tr:last-child td:last-child {
-	-moz-border-radius-bottomright:7px;
-	-webkit-border-bottom-right-radius:7px;
-	border-bottom-right-radius:7px;
-}
-.CSSTableGenerator table tr:first-child td:first-child {
-	-moz-border-radius-topleft:7px;
-	-webkit-border-top-left-radius:7px;
-	border-top-left-radius:7px;
-}
-.CSSTableGenerator table tr:first-child td:last-child {
-	-moz-border-radius-topright:7px;
-	-webkit-border-top-right-radius:7px;
-	border-top-right-radius:7px;
-}.CSSTableGenerator tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:7px;
-	-webkit-border-bottom-left-radius:7px;
-	border-bottom-left-radius:7px;
-}.CSSTableGenerator tr:hover td{
-	
-}
-.CSSTableGenerator tr:nth-child(odd){ background-color:#aad4ff; }
-.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
-	vertical-align:middle;
-	
-	
-	border:1px solid #000000;
-	border-width:0px 1px 1px 0px;
-	text-align:left;
-	padding:7px;
-	font-size:17px;
-	font-family:Arial;
-	font-weight:normal;
-	color:#000000;
-}.CSSTableGenerator tr:last-child td{
-	border-width:0px 1px 0px 0px;
-}.CSSTableGenerator tr td:last-child{
-	border-width:0px 0px 1px 0px;
-}.CSSTableGenerator tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
-}
-.CSSTableGenerator tr:first-child td{
-		background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
-	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,003f7f);
 
-	background-color:#005fbf;
-	border:0px solid #000000;
-	text-align:center;
-	border-width:0px 0px 1px 1px;
-	font-size:14px;
-	font-family:Arial;
-	font-weight:bold;
-	color:#ffffff;
-}
-.CSSTableGenerator tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
-	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,003f7f);
-
-	background-color:#005fbf;
-}
-.CSSTableGenerator tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
-}
-.CSSTableGenerator tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
-}

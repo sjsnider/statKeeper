@@ -3,7 +3,7 @@ Leagues: <select ng-model="allLeagues" ng-options="league.name for league in dis
 	</select><br><br>
 
 	<div ng-show="statShow">
-		<table border="1px">
+		<table class="hovertable">
 			<tr>
 				<th ng-click="orderByField='name'; reverseSort = !reverseSort">
           			Name <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span>
@@ -66,7 +66,7 @@ Leagues: <select ng-model="allLeagues" ng-options="league.name for league in dis
           			<span ng-show="reverseSort">v</span></span>
           		</th>
 			</tr>
-			<tr ng-repeat="player in playersDisplayArray | orderBy:orderByField:reverseSort">
+			<tr ng-repeat="player in playersDisplayArray | orderBy:orderByField:reverseSort" class="fx-fade-left fx-easing-bounce fx-speed-1600">
 				<td>{{player.name}}</td>
 				<td>{{player.team}}</td>
 				<td>{{player.gp}}</td>

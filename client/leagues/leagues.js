@@ -53,8 +53,7 @@ angular.module('statKeeper.main.leagues', ['ngRoute'])
 
 	$scope.playerSubmit = function(){
 		if($scope.allTeams){
-	   		var team = $scope.allTeams.name;
-	   		console.log(team);
+	   		$scope.team = $scope.allTeams.name;
 		} else {
 			alert('You must select a team!');
 	   		return;
@@ -65,7 +64,7 @@ angular.module('statKeeper.main.leagues', ['ngRoute'])
 	    	var playerPromise = $http.post('/newPlayer', {
 	    		name: newPlayer,   
 	        	league: $scope.league,
-	        	team: team
+	        	team: $scope.team
 	     	});
 	    	playerPromise.success(function(data, status, headers, config){
 	        	console.log(data);

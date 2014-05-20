@@ -5,20 +5,22 @@
 	  Sport: <select ng-model="allSports" ng-options="sport.name for sport in sports" ng-change="update()" required></select><br>
 	  <h2>League Name:  <span class="names">{{ league }}</span> 
 	  	<br> Sport:   <span class="names">{{ curSport }}</span></h2>
+	  <div ng-show="showStatCats">
 	  Click on any stat you wish to remove:<br>
-		<div ng-repeat="category in categoriesArray" class ='removeButton' ng-click="remove($index)">{{ category }}</div>
+		<div ng-repeat="category in categoriesArray" class ='removeButton fx-fade-down fx-easing-bounce fx-speed-1000' ng-click="remove($index)">{{ category }}</div>
 
 	  <br><br>Put back any stats you removed that you'd like to include:<br>
 
-	 	<div ng-repeat="category in removedCategoriesArray" class ='addButton' ng-click="add($index)">{{ category }}</div>
+	 	<div ng-repeat="category in removedCategoriesArray" class ='addButton fx-fade-up fx-easing-bounce fx-speed-1000' ng-click="add($index)">{{ category }}</div>
 	  		<br><input type="submit" value="Create New League">
+	  </div>
 	  </form>
 	</div>
 
 	<div class="statsContainer">
 		<h2>Click on an existing league to fill out team rosters!</h2>
 		Search: <input ng-model="searchText"><br>
-		<div ng-repeat="league in displayLeagues | orderBy: predicate | filter:searchText">
-		<h2><a href="#/leagues/{{ league.name }}"><span class="names">{{ league.name }} - {{ league.sport }}</span></a></h2>
+		<div class='fx-fade-down fx-speed-1600' ng-repeat="league in displayLeagues | orderBy: predicate | filter:searchText">
+		<a href="#/leagues/{{ league.name }}"><img src="{{league.picPath}}" width="50px" height="50px"><span class="names">{{ league.name }}</span></a>&nbsp&nbsp<div class ='addButton' ng-model="league" ng-click="removeLeague(league.name)">Remove League</div>
 	</div>
 </div>

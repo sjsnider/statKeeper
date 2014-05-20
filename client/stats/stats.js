@@ -11,16 +11,22 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
 	$scope.showTeams = false;
     $scope.showPlayers = false;
     $scope.statEnter = false;
+    $scope.allLeagues = {selectedOption: 'x'};
 
 	var leaguesPromise = $http.get('/leagues');
     leaguesPromise.success(function(data, status, headers, config){
     $scope.displayLeagues = data;
     });
 
+
     $scope.displayTeams = function(){
-    	if($scope.allLeagues){
-	   		$scope.league = $scope.allLeagues.name;
-	   		$scope.stats = $scope.allLeagues.statCategories;
+    	console.log('in');
+    	console.log('passed');
+    	$scope.showPlayers = false;
+    	$scope.statEnter = false;
+	   		$scope.league = $scope.allLeagues.selectedOption.name;
+	   		$scope.stats = $scope.allLeagues.selectedOption.statCategories;
+	   		console.log($scope.league, $scope.stats);
 	   		$scope.PAshow = false;
 			$scope.ABsshow = false;
 			$scope.Hitsshow = false;
@@ -32,7 +38,6 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
 			$scope.RBIsshow = false;
 			$scope.Runsshow = false;
 			for (var i=0; i<$scope.stats.length; i++){
-				console.log($scope.stats[i]);
 				switch($scope.stats[i]){
 					case 'PA':
 						$scope.PAshow = true;
@@ -66,11 +71,6 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
 						break;
 				}
 			}
-			console.log($scope.HRsshow);
-		} else {
-			alert('You must select a league!');
-	   		return;
-		}
     	$scope.showTeams = true;
     	$scope.showPlayers = false;
     	$scope.statEnter = false;
@@ -81,13 +81,8 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
     };
 
     $scope.displayPlayers = function(){
-    	if($scope.allTeams){
-	   		$scope.team = $scope.allTeams.name;
-	   		console.log($scope.team);
-		} else {
-			alert('You must select a team!');
-	   		return;
-		}
+	   	$scope.team = $scope.allTeams.name;
+	   	console.log($scope.team);
     	$scope.showPlayers = true;
     	$scope.statEnter = false;
 		var playerPromise = $http.get('/players/' + $scope.league + '/' + $scope.team);
@@ -98,13 +93,9 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
     };
 
     $scope.displayPlayer = function(){
-    	if($scope.allPlayers){
-	   		$scope.player = $scope.allPlayers.name;
-	   		console.log($scope.player);
-		} else {
-			alert('You must select a player!');
-	   		return;
-		}
+	   	$scope.player = $scope.allPlayers.name;
+	   	console.log($scope.player);
+
 		$scope.statEnter = true;
 		console.log($scope.stats);
     };
@@ -128,6 +119,16 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
         });
       leaguePromise.success(function(data, status, headers, config){
       	$scope.statEnter = false;
+          $scope.PA='';
+          $scope.ABs='';
+          $scope.Hits='';
+          $scope.Walks='';
+          $scope.singles='';
+          $scope.doubles='';
+          $scope.triples='';
+          $scope.HRs='';
+          $scope.RBIs='';
+          $scope.Runs='';
       	console.log($scope.statEnter);
       });
     };

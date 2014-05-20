@@ -16,6 +16,7 @@
     $scope.curSport = '';
     $scope.displayLeagues = [];
     $scope.predicate = "name";
+    $scope.showStatCats = false;
 
     var sportPromise = $http.get('/sports');
     sportPromise.success(function(data, status, headers, config){
@@ -24,7 +25,7 @@
 
     $scope.update = function(){
       $scope.curSport = $scope.allSports.name;
- 
+      $scope.showStatCats = true;
       $scope.removedCategoriesArray = [];
       console.log($scope.removedCategoriesArray);
       for (var i=0;i<$scope.sports.length;i++){
@@ -46,10 +47,18 @@
       $scope.removedCategoriesArray.push(val);
     };
 
+    $scope.removeLeague = function(league){
+      console.log('in remove league' + league);
+      var leagueRemove = $http.post('/removeLeague', {
+        league: league
+      });
+      $scope.getLeagues();
+    };
+
     $scope.leagueSubmit = function(){
       var newLeague = $scope.league;
       if($scope.allSports){
-        var sport = $scope.allSports.name;
+        $scope.sport = $scope.allSports.name;
       } else {
         alert('You must select a sport!');
         return;
@@ -58,7 +67,7 @@
       console.log(statCategories);
       var leaguePromise = $http.post('/newLeague', {
           newLeague: newLeague,   
-          sport: sport,
+          sport: $scope.sport,
           statCategories: statCategories
         });
       leaguePromise.success(function(data, status, headers, config){
@@ -66,10 +75,19 @@
         $scope.league = "Create Another One!";
       });
     };
-
-    var leaguesPromise = $http.get('/leagues');
-    leaguesPromise.success(function(data, status, headers, config){
-      $scope.displayLeagues = data;
-    });
+    $scope.getLeagues = function(){
+      var leaguesPromise = $http.get('/leagues');
+      leaguesPromise.success(function(data, status, headers, config){
+        $scope.displayLeagues = data;
+        for(var i=0; i<$scope.displayLeagues.length; i++){
+          if($scope.displayLeagues[i].sport === "Softball"){
+            $scope.displayLeagues[i].picPath = '/softball.png';
+          } else {
+            $scope.displayLeagues[i].picPath = '/basketball.png';
+          }
+        }
+      });
+    };
+    $scope.getLeagues();
   });
 }(angular));
