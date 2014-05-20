@@ -1,0 +1,87 @@
+<h2>Select Existing League</h2>
+Leagues: <select ng-model="allLeagues" ng-options="league.name for league in displayLeagues" ng-change="displayStats()" required>
+	</select><br><br>
+
+	<div ng-show="statShow">
+		<table border="1px">
+			<tr>
+				<th ng-click="orderByField='name'; reverseSort = !reverseSort">
+          			Name <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='team'; reverseSort = !reverseSort">
+          			Team <span ng-show="orderByField == 'team'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='gp'; reverseSort = !reverseSort">
+          			GP <span ng-show="orderByField == 'gp'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='pa'; reverseSort = !reverseSort">
+          			PA <span ng-show="orderByField == 'pa'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='ab'; reverseSort = !reverseSort">
+          			ABs <span ng-show="orderByField == 'doubles'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="ab">v</span></span>
+          		</th>
+				<th ng-click="orderByField='hits'; reverseSort = !reverseSort">
+          			Hits <span ng-show="orderByField == 'hits'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='avg'; reverseSort = !reverseSort">
+          			AVG <span ng-show="orderByField == 'avg'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='bb'; reverseSort = !reverseSort">
+          			BBs <span ng-show="orderByField == 'bb'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='obp'; reverseSort = !reverseSort">
+          			OBP <span ng-show="orderByField == 'obp'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          			</th>
+				<th ng-click="orderByField='singles'; reverseSort = !reverseSort">
+          			1Bs <span ng-show="orderByField == 'singles'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          			</th>
+				<th ng-click="orderByField='doubles'; reverseSort = !reverseSort">
+          			2Bs <span ng-show="orderByField == 'doubles'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          			</th>
+				<th ng-click="orderByField='triples'; reverseSort = !reverseSort">
+          			3Bs <span ng-show="orderByField == 'triples'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='hrs'; reverseSort = !reverseSort">
+          			HRs <span ng-show="orderByField == 'hrs'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='rbis'; reverseSort = !reverseSort">
+          			RBIs <span ng-show="orderByField == 'rbis'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+				<th ng-click="orderByField='runs'; reverseSort = !reverseSort">
+          			Runs <span ng-show="orderByField == 'runs'"><span ng-show="!reverseSort">^</span>
+          			<span ng-show="reverseSort">v</span></span>
+          		</th>
+			</tr>
+			<tr ng-repeat="player in playersDisplayArray | orderBy:orderByField:reverseSort">
+				<td>{{player.name}}</td>
+				<td>{{player.team}}</td>
+				<td>{{player.gp}}</td>
+				<td>{{player.pa}}</td>
+				<td>{{player.ab}}</td>
+				<td>{{player.hits}}</td>
+				<td>{{player.avg}}</td>
+				<td>{{player.bb}}</td>
+				<td>{{player.obp}}</td>
+				<td>{{player.singles}}</td>
+				<td>{{player.doubles}}</td>
+				<td>{{player.triples}}</td>
+				<td>{{player.hrs}}</td>
+				<td>{{player.rbis}}</td>
+				<td>{{player.runs}}</td>
+			</tr>
+		</table>
+	</div>

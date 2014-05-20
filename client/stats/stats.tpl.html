@@ -1,0 +1,51 @@
+<h2>Select Existing League</h2>
+Leagues: <select ng-model="allLeagues" ng-options="league.name for league in displayLeagues" ng-change="displayTeams()" required>
+	</select><br>
+	<div ng-show="showTeams">
+		<h2>Select Existing Team</h2>
+		Teams: <select ng-model="allTeams" ng-options="team.name for team in displayTeams" ng-change="displayPlayers()" 
+	 	required>
+		</select>
+	</div>
+	<div ng-show="showPlayers">
+	<h2>Select Players to input stats for</h2>
+		Players: <select ng-model="allPlayers" ng-options="player.name for player in playersArray" ng-change="displayPlayer()" 
+	 	required>
+		</select>
+	</div>
+	<br><br>
+	<div class="CSSTableGenerator" ng-show="statEnter">
+	<form name="myForm" ng-submit="statSubmit()">
+		<table>
+		<tr>
+			<td>Player Name</td>
+			<td ng-show='PAshow'>PA</td>
+			<td ng-show='ABshow'>ABS</td>
+			<td ng-show='Hitsshow'>Hits</td>
+			<td ng-show='Walksshow'>Walks</td>
+			<td ng-show='singlesshow'>1Bs</td>
+			<td ng-show='doublesshow'>2Bs</td>
+			<td ng-show='triplesshow'>3Bs</td>
+			<td ng-show='HRsshow'>HRs</td>
+			<td ng-show='RBIsshow'>RBIs</td>
+			<td ng-show='Runsshow'>Runs</td>
+		</tr>
+		<tr>
+			<td>{{ player }}</td>
+			<td ng-show='PAshow'><input ng-model='PA' type="text" style="width:50px"></td>
+			<td ng-show='ABshow'><input ng-model='ABs' type="text" style="width:50px"></td>
+			<td ng-show='Hitsshow'><input ng-model='Hits' type="text" style="width:50px"></td>
+			<td ng-show='Walksshow'><input ng-model='Walks' type="text" style="width:50px"></td>
+			<td ng-show='singlesshow'><input ng-model='singles' type="text" style="width:50px"></td>
+			<td ng-show='doublesshow'><input ng-model='doubles' type="text" style="width:50px"></td>
+			<td ng-show='triplesshow'><input ng-model='triples' type="text" style="width:50px"></td>
+			<td ng-show='HRsshow'><input ng-model='HRs' type="text" style="width:50px"></td>
+			<td ng-show='RBIsshow'><input ng-model='RBIs' type="text" style="width:50px"></td>
+			<td ng-show='Runsshow'><input ng-model='Runs' type="text" style="width:50px"></td>
+
+		</tr>
+		<tr></tr>
+		</table>
+		<br><input type="submit" value="Submit Stats">
+	</form>
+	</div>
