@@ -1,8 +1,8 @@
-<div>
+<div class = "enterStatsContainer">
+	<form name="myForm" ng-submit="statSubmit()">
 <h2>Select Existing League</h2>
-Leagues: <select ng-model="allLeagues.selectedOption" ng-options="league.name for league in displayLeagues" ng-change="displayTeams()">
+Leagues: <select ng-model="allLeagues" ng-options="league.name for league in displayLeagues" ng-change="displayAllTeams()">
 	</select><br>
-</div>
 	<div ng-show="showTeams">
 		<h2>Select Existing Team</h2>
 		Teams: <select ng-model="allTeams" ng-options="team.name for team in displayTeams" ng-change="displayPlayers()" 
@@ -16,7 +16,7 @@ Leagues: <select ng-model="allLeagues.selectedOption" ng-options="league.name fo
 	</div>
 	<br><br>
 	<div ng-show="statEnter" class="fx-fade-down fx-easing-bounce fx-speed-1600">
-	<form name="myForm" ng-submit="statSubmit()">
+
 		<table class="hovertable">
 		<tr>
 			<th>Player Name</th>
@@ -50,3 +50,4 @@ Leagues: <select ng-model="allLeagues.selectedOption" ng-options="league.name fo
 		<br><input type="submit" value="Submit Stats">
 	</form>
 	</div>
+</div>

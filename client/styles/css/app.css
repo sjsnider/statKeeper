@@ -26,7 +26,7 @@
 .addButton {
   background-color: #ff0000; }
 
-.statsContainer {
+.statsContainer, .enterStatsContainer {
   width: 500px;
   border: 2px solid;
   border-radius: 25px;
@@ -34,6 +34,10 @@
   padding: 10px;
   float: left;
   background-color: #d3d3d3; }
+
+.enterStatsContainer {
+  width: 750px;
+  text-align: center; }
 
 .names {
   color: #ff0000; }
@@ -86,3 +90,29 @@ table.hovertable td {
   padding: 8px;
   border-style: solid;
   border-color: #a9c6c9; }
+
+.demo select {
+  border: 0 !important;
+  /*Removes border*/
+  -webkit-appearance: none;
+  /*Removes default chrome and safari style*/
+  -moz-appearance: none;
+  /* Removes Default Firefox style*/
+  background: #0088cc url(img/select-arrow.png) no-repeat 90% center;
+  width: 100px;
+  /*Width of select dropdown to give space for arrow image*/
+  text-indent: 0.01px;
+  /* Removes default arrow from firefox*/
+  text-overflow: "";
+  /*Removes default arrow from firefox*/
+  /*My custom style for fonts*/
+  color: #FFF;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); }
+
+.demo select.balck {
+  background-color: #000; }
+
+.demo select.option3 {
+  border-radius: 10px 0; }

@@ -11,21 +11,19 @@ angular.module('statKeeper.main.stats', ['ngRoute'])
 	$scope.showTeams = false;
     $scope.showPlayers = false;
     $scope.statEnter = false;
-    $scope.allLeagues = {selectedOption: 'x'};
-
 	var leaguesPromise = $http.get('/leagues');
     leaguesPromise.success(function(data, status, headers, config){
     $scope.displayLeagues = data;
     });
 
 
-    $scope.displayTeams = function(){
+    $scope.displayAllTeams = function(){
     	console.log('in');
     	console.log('passed');
     	$scope.showPlayers = false;
     	$scope.statEnter = false;
-	   		$scope.league = $scope.allLeagues.selectedOption.name;
-	   		$scope.stats = $scope.allLeagues.selectedOption.statCategories;
+	   		$scope.league = $scope.allLeagues.name;
+	   		$scope.stats = $scope.allLeagues.statCategories;
 	   		console.log($scope.league, $scope.stats);
 	   		$scope.PAshow = false;
 			$scope.ABsshow = false;
