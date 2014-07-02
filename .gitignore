@@ -2,3 +2,5 @@ node_modules/
 client/lib
 _DS_Store
 DS_Store
+Pay.publishsettings
+azure.err
