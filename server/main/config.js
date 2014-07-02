@@ -7,7 +7,7 @@ var mongoose    = require('mongoose'),
 
 var handler = require('./request-handler');
 
-mongoose.connect(process.env.DB_URL || 'mongodb://localhost/statKeeper');
+mongoose.connect(process.env.MONCONNECT || 'mongodb://localhost/statKeeper');
 
 /*
  * Include all your global env variables here.
